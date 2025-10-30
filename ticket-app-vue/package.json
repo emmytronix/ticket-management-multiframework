@@ -1,0 +1,28 @@
+{
+  "name": "ticket-app-vue",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "homepage": "https://emmytronix.github.io/ticket-app-vue",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
+  "dependencies": {
+    "lucide-vue-next": "^0.548.0",
+    "vue": "^3.3.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.16",
+    "@vitejs/plugin-vue": "^4.2.3",
+    "autoprefixer": "^10.4.14",
+    "gh-pages": "^6.0.0",
+    "postcss": "^8.4.27",
+    "serve": "^14.2.5",
+    "tailwindcss": "^3.3.3",
+    "vite": "^4.4.5"
+  }
+}

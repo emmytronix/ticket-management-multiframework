@@ -1,0 +1,90 @@
+{% extends "layout.html.twig" %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-purple-600">TicketFlow</h1>
+            <nav class="hidden md:flex gap-4">
+                <a href="index.php?page=login" class="px-4 py-2 text-purple-600 hover:text-purple-700">Login</a>
+                <a href="index.php?page=signup" class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">Get Started</a>
+            </nav>
+            <button class="md:hidden" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t px-4 py-3">
+            <a href="index.php?page=login" class="block w-full text-left py-2">Login</a>
+            <a href="index.php?page=signup" class="block w-full text-left py-2">Get Started</a>
+        </div>
+    </header>
+
+    <!-- Hero Section with Wave -->
+    <section class="relative bg-gradient-to-br from-purple-600 to-purple-800 text-white overflow-hidden">
+        <div class="absolute top-10 right-10 w-64 h-64 bg-purple-500 rounded-full opacity-20"></div>
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+            <div class="text-center max-w-3xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Manage Your Tickets Effortlessly</h2>
+                <p class="text-xl mb-8 text-purple-100">
+                    Track, organize, and resolve customer support tickets with ease using our intuitive platform
+                </p>
+                <div class="flex gap-4 justify-center flex-wrap">
+                    <a href="index.php?page=signup" class="px-8 py-3 bg-white text-purple-600 rounded-lg font-semibold hover:bg-gray-100">
+                        Get Started
+                    </a>
+                    <a href="index.php?page=login" class="px-8 py-3 border-2 border-white text-white rounded-lg font-semibold hover:bg-purple-700">
+                        Login
+                    </a>
+                </div>
+            </div>
+        </div>
+        <svg class="absolute bottom-0 left-0 w-full" viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 50C240 20 480 80 720 50C960 20 1200 80 1440 50V100H0V50Z" fill="#F9FAFB"/>
+        </svg>
+    </section>
+
+    <!-- Features Section -->
+    <section class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <h3 class="text-3xl font-bold text-center mb-12 text-gray-800">Why Choose TicketFlow?</h3>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition">
+                <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                <h4 class="text-xl font-semibold mb-2 text-gray-800">Easy Tracking</h4>
+                <p class="text-gray-600">Monitor all tickets in one place with status updates</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition">
+                <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                <h4 class="text-xl font-semibold mb-2 text-gray-800">Quick Resolution</h4>
+                <p class="text-gray-600">Streamline your workflow and resolve issues faster</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition">
+                <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                <h4 class="text-xl font-semibold mb-2 text-gray-800">Team Collaboration</h4>
+                <p class="text-gray-600">Work together efficiently on customer issues</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 2025 TicketFlow. All rights reserved.</p>
+        </div>
+    </footer>
+</div>
+{% endblock %}
