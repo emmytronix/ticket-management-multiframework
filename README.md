@@ -8,7 +8,7 @@ A comprehensive ticket management system implemented in three different frontend
 |-----------|----------|------------|
 | **React** | [View Demo](https://emmytronix.github.io/ticket-app-react) | [GitHub](https://github.com/emmytronix/ticket-app-react) |
 | **Vue.js** | [View Demo](https://emmytronix.github.io/ticket-app-vue) | [GitHub](https://github.com/emmytronix/ticket-app-vue) |
-| **Twig/PHP** | [View Demo](https://ticket-app-twig-production-d42b.up.railway.app/) | [GitHub](https://github.com/emmytronix/ticket-app-twig) |
+| **Twig/PHP** | [View Demo](https://ticket-app-twig-production-9cb7.up.railway.app/) | [GitHub](https://github.com/emmytronix/ticket-app-twig) |
 
 ## 📋 Project Overview
 
