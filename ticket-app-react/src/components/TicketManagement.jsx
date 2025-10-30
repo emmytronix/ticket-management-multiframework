@@ -80,45 +80,44 @@ const TicketManagement = ({ onNavigate, onLogout }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
       
-      {/* Header */}
       <header className="bg-white shadow-sm">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-purple-600">TicketFlow</h1>
-          <div className="flex gap-4">
-            <button 
-              onClick={() => onNavigate('/dashboard')} 
-              className="px-4 py-2 text-gray-600 hover:text-gray-800"
-            >
-              Dashboard
-            </button>
-            <button 
-              onClick={onLogout} 
-              className="flex items-center gap-2 px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg transition"
-            >
-              <LogOut size={20} />
-              Logout
-            </button>
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex justify-between items-center">
+            <h1 className="text-2xl font-bold text-purple-600">TicketFlow</h1>
+            <div className="flex gap-4">
+              <button 
+                onClick={() => onNavigate('/dashboard')} 
+                className="px-4 py-2 text-gray-600 hover:text-gray-800 font-medium"
+              >
+                Dashboard
+              </button>
+              <button 
+                onClick={onLogout} 
+                className="flex items-center gap-2 px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg transition"
+              >
+                <LogOut size={20} />
+                <span className="hidden sm:inline">Logout</span>
+              </button>
+            </div>
           </div>
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex justify-between items-center mb-8">
+      <main className="flex-1 max-w-[1440px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
           <h2 className="text-3xl font-bold text-gray-800">Ticket Management</h2>
           <button
             onClick={() => setShowForm(true)}
-            className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition"
+            className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition shadow-lg"
           >
             <Plus size={20} />
             New Ticket
           </button>
         </div>
 
-        {/* Ticket Form */}
         {showForm && (
           <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
             <h3 className="text-xl font-semibold mb-4 text-gray-800">
@@ -195,21 +194,41 @@ const TicketManagement = ({ onNavigate, onLogout }) => {
           </div>
         )}
 
-        {/* Tickets List */}
-        <div className="grid gap-4">
+        <div className="space-y-4">
           {tickets.length === 0 ? (
-            <div className="bg-white rounded-xl shadow-md p-8 text-center text-gray-500">
-              No tickets yet. Create your first ticket to get started.
+            <div className="bg-white rounded-xl shadow-md p-12 text-center">
+              <div className="max-w-md mx-auto">
+                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Plus className="text-purple-600" size={32} />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">No tickets yet</h3>
+                <p className="text-gray-500 mb-4">Create your first ticket to get started.</p>
+                <button
+                  onClick={() => setShowForm(true)}
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition"
+                >
+                  <Plus size={20} />
+                  Create Ticket
+                </button>
+              </div>
             </div>
           ) : (
             tickets.map(ticket => (
               <div key={ticket.id} className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition">
-                <div className="flex justify-between items-start mb-3">
-                  <div className="flex-1">
+                <div className="flex flex-col sm:flex-row justify-between items-start gap-4">
+                  <div className="flex-1 min-w-0">
                     <h3 className="text-xl font-semibold text-gray-800 mb-2">{ticket.title}</h3>
-                    <p className="text-gray-600">{ticket.description}</p>
+                    <p className="text-gray-600 mb-3">{ticket.description || 'No description'}</p>
+                    <div className="flex flex-wrap gap-2">
+                      <span className={`px-3 py-1 rounded-full text-sm font-medium ${statusColors[ticket.status]}`}>
+                        {ticket.status.replace('_', ' ')}
+                      </span>
+                      <span className="px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-700">
+                        {ticket.priority}
+                      </span>
+                    </div>
                   </div>
-                  <div className="flex gap-2 ml-4">
+                  <div className="flex gap-2 flex-shrink-0">
                     <button 
                       onClick={() => handleEdit(ticket)} 
                       className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition"
@@ -226,24 +245,15 @@ const TicketManagement = ({ onNavigate, onLogout }) => {
                     </button>
                   </div>
                 </div>
-                <div className="flex gap-2 flex-wrap">
-                  <span className={`px-3 py-1 rounded-full text-sm font-medium ${statusColors[ticket.status]}`}>
-                    {ticket.status.replace('_', ' ')}
-                  </span>
-                  <span className="px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-700">
-                    {ticket.priority}
-                  </span>
-                </div>
               </div>
             ))
           )}
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-gray-800 text-white py-8 mt-12">
+      <footer className="bg-gray-800 text-white py-8 mt-auto">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p>&copy; 2025 TicketFlow. All rights reserved.</p>
+          <p className="text-sm md:text-base">&copy; 2025 TicketFlow. All rights reserved.</p>
         </div>
       </footer>
     </div>

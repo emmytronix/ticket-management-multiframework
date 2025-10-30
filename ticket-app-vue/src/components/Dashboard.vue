@@ -1,6 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
-    <!-- Header -->
+  <div class="min-h-screen bg-gray-50 flex flex-col">
     <header class="bg-white shadow-sm">
       <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
         <h1 class="text-2xl font-bold text-purple-600">TicketFlow</h1>
@@ -14,11 +13,9 @@
       </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main class="flex-1 max-w-[1440px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <h2 class="text-3xl font-bold mb-8 text-gray-800">Dashboard</h2>
       
-      <!-- Statistics Cards -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <div 
           v-for="(stat, i) in stats" 
@@ -37,7 +34,6 @@
         </div>
       </div>
 
-      <!-- Quick Actions -->
       <div class="bg-white rounded-xl shadow-md p-6">
         <h3 class="text-xl font-semibold mb-4 text-gray-800">Quick Actions</h3>
         <button
@@ -49,8 +45,7 @@
       </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8 mt-12">
+    <footer class="bg-gray-800 text-white py-8 mt-auto">
       <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <p>&copy; 2025 TicketFlow. All rights reserved.</p>
       </div>

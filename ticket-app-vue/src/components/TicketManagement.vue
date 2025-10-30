@@ -1,43 +1,42 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
+  <div class="min-h-screen bg-gray-50 flex flex-col">
     <Toast v-if="toast" :message="toast.message" :type="toast.type" @close="toast = null" />
     
-    <!-- Header -->
     <header class="bg-white shadow-sm">
-      <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-        <h1 class="text-2xl font-bold text-purple-600">TicketFlow</h1>
-        <div class="flex gap-4">
-          <button 
-            @click="$emit('navigate', '/dashboard')" 
-            class="px-4 py-2 text-gray-600 hover:text-gray-800"
-          >
-            Dashboard
-          </button>
-          <button 
-            @click="$emit('logout')" 
-            class="flex items-center gap-2 px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg transition"
-          >
-            <LogOut :size="20" />
-            Logout
-          </button>
+      <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div class="flex justify-between items-center">
+          <h1 class="text-2xl font-bold text-purple-600">TicketFlow</h1>
+          <div class="flex gap-4">
+            <button 
+              @click="$emit('navigate', '/dashboard')" 
+              class="px-4 py-2 text-gray-600 hover:text-gray-800 font-medium"
+            >
+              Dashboard
+            </button>
+            <button 
+              @click="$emit('logout')" 
+              class="flex items-center gap-2 px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg transition"
+            >
+              <LogOut :size="20" />
+              <span class="hidden sm:inline">Logout</span>
+            </button>
+          </div>
         </div>
       </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div class="flex justify-between items-center mb-8">
+    <main class="flex-1 max-w-[1440px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
         <h2 class="text-3xl font-bold text-gray-800">Ticket Management</h2>
         <button
           @click="showForm = true"
-          class="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition"
+          class="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition shadow-lg"
         >
           <Plus :size="20" />
           New Ticket
         </button>
       </div>
 
-      <!-- Ticket Form -->
       <div v-if="showForm" class="bg-white rounded-xl shadow-lg p-6 mb-8">
         <h3 class="text-xl font-semibold mb-4 text-gray-800">
           {{ editingId ? 'Edit' : 'Create' }} Ticket
@@ -108,13 +107,25 @@
         </div>
       </div>
 
-      <!-- Tickets List -->
-      <div class="grid gap-4">
+      <div class="space-y-4">
         <div 
           v-if="tickets.length === 0" 
-          class="bg-white rounded-xl shadow-md p-8 text-center text-gray-500"
+          class="bg-white rounded-xl shadow-md p-12 text-center"
         >
-          No tickets yet. Create your first ticket to get started.
+          <div class="max-w-md mx-auto">
+            <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Plus class="text-purple-600" :size="32" />
+            </div>
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">No tickets yet</h3>
+            <p class="text-gray-500 mb-4">Create your first ticket to get started.</p>
+            <button
+              @click="showForm = true"
+              class="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition"
+            >
+              <Plus :size="20" />
+              Create Ticket
+            </button>
+          </div>
         </div>
         
         <div 
@@ -122,12 +133,25 @@
           :key="ticket.id" 
           class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition"
         >
-          <div class="flex justify-between items-start mb-3">
-            <div class="flex-1">
+          <div class="flex flex-col sm:flex-row justify-between items-start gap-4">
+            <div class="flex-1 min-w-0">
               <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ ticket.title }}</h3>
-              <p class="text-gray-600">{{ ticket.description }}</p>
+              <p class="text-gray-600 mb-3">{{ ticket.description || 'No description' }}</p>
+              <div class="flex flex-wrap gap-2">
+                <span 
+                  :class="[
+                    'px-3 py-1 rounded-full text-sm font-medium',
+                    statusColors[ticket.status]
+                  ]"
+                >
+                  {{ ticket.status.replace('_', ' ') }}
+                </span>
+                <span class="px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-700">
+                  {{ ticket.priority }}
+                </span>
+              </div>
             </div>
-            <div class="flex gap-2 ml-4">
+            <div class="flex gap-2 flex-shrink-0">
               <button 
                 @click="handleEdit(ticket)" 
                 class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition"
@@ -144,27 +168,13 @@
               </button>
             </div>
           </div>
-          <div class="flex gap-2 flex-wrap">
-            <span 
-              :class="[
-                'px-3 py-1 rounded-full text-sm font-medium',
-                statusColors[ticket.status]
-              ]"
-            >
-              {{ ticket.status.replace('_', ' ') }}
-            </span>
-            <span class="px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-700">
-              {{ ticket.priority }}
-            </span>
-          </div>
         </div>
       </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8 mt-12">
+    <footer class="bg-gray-800 text-white py-8 mt-auto">
       <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <p>&copy; 2025 TicketFlow. All rights reserved.</p>
+        <p class="text-sm md:text-base">&copy; 2025 TicketFlow. All rights reserved.</p>
       </div>
     </footer>
   </div>
